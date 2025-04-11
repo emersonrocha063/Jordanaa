@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>A Jornada da Princesa Jordana</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Georgia', cursive;
+      background: linear-gradient(#fcd1f7, #fdeefc);
+      overflow: hidden;
+    }
+
+    #game {
+      text-align: center;
+      padding: 60px 20px;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      color: #d63384;
+    }
+
+    #message {
+      font-size: 1.4em;
+      margin-top: 40px;
+      color: #6b0d4e;
+      transition: all 0.4s ease-in-out;
+    }
+
+    button {
+      padding: 12px 24px;
+      font-size: 1.1em;
+      margin-top: 30px;
+      background-color: #ff9de2;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    button:hover {
+      background-color: #ff78d1;
+    }
+
+    .heart {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      background: pink;
+      transform: rotate(45deg);
+      animation: float 8s linear infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: pink;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes float {
+      0% {
+        bottom: -10px;
+        left: calc(100% * var(--i));
+        opacity: 1;
+      }
+      100% {
+        bottom: 100%;
+        left: calc(100% * var(--i) + 20px);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <audio autoplay loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/10/20/audio_3137e83152.mp3" type="audio/mp3">
+  </audio>
+
+  <div id="game">
+    <h1>🌸 A Jornada da Princesa Jordana 🌸</h1>
+    <div id="message">Era uma vez, em um reino encantado, uma princesa chamada Jordana...</div>
+    <button onclick="nextStep()">Avançar</button>
+  </div>
+
+  <script>
+    const messages = [
+      "Seu sorriso iluminava o reino mais do que mil estrelas.",
+      "Todos os dias, um príncipe sonhava com o momento de encontrá-la.",
+      "E quando finalmente a viu, o mundo parou por um instante.",
+      "Cada palavra dela era uma canção, cada gesto um encanto.",
+      "E ele soube: era ela. Sua princesa. Seu amor.",
+      "E agora, diante do castelo, ele diz:",
+      "“Jordana, você é meu conto de fadas que se tornou real.”",
+      "Com amor eterno, Emerson 💫"
+    ];
+
+    let index = 0;
+    const messageBox = document.getElementById('message');
+
+    function nextStep() {
+      if (index < messages.length) {
+        messageBox.innerText = messages[index];
+        index++;
+      } else {
+        document.querySelector('button').style.display = 'none';
+        messageBox.innerHTML += "<br><br>💖 Fim da Jornada 💖";
+      }
+    }
+
+    // corações flutuando
+    for (let i = 0; i < 20; i++) {
+      let heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * 100 + '%';
+      heart.style.setProperty('--i', Math.random());
+      heart.style.animationDuration = (6 + Math.random() * 5) + 's';
+      document.body.appendChild(heart);
+    }
+  </script>
+</body>
+</html>
